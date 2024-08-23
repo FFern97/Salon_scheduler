@@ -11,9 +11,9 @@ CREATE TABLE appointments(appointment_id SERIAL PRIMARY KEY NOT NULL, time VARCH
 CREATE TABLE  services(service_id SERIAL PRIMARY KEY NOT NULL, name VARCHAR(50) NOT NULL); 
 
 ALTER TABLE appointments 
-  ADD CONSTRAINT appointment_service FOREIGN KEY(service_id) services(service_id);  
+  ADD CONSTRAINT appointment_service FOREIGN KEY(service_id) REFERENCES services(service_id);  
 ALTER TABLE appointments 
-  ADD CONSTRAINT appointment_customer FOREIGN KEY(customer_id) customers(customer_id);
+  ADD CONSTRAINT appointment_customer FOREIGN KEY(customer_id) REFERENCES customers(customer_id);
 
 
   
