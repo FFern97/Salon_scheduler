@@ -29,7 +29,7 @@ done
 read SERVICE_SELECTION
 SERVICE_EXIST=$($PSQL "SELECT  name FROM services WHERE service_id=$SERVICE_SELECTION")
 
-if [[ -z SERVICE_EXIST ]]
+if [[ -z $SERVICE_EXIST ]]
 then 
   MAIN_MENU "Couldn't find that service. Please choose again!"
 fi
@@ -41,12 +41,12 @@ read PHONE_NUMBER
 
 CUSTOMER_EXIST=$($PSQL "SELECT customer_id name FROM customers WHERE phone=$PHONE_NUMBER")
 
-if [[ -z CUSTOMER_EXIST ]]
+if [[ -z $CUSTOMER_EXIST ]]
   then 
   echo -e "New here? Insert your name please"
   read NAME
   INSERTED=$($PSQL "INSERT INTO customers (name, phone) VALUES ('$NAME', '$PHONE_NUMBER')")
-  echo -e "Thanks $name! Please pick the time for your appointment:"
+  echo -e "Thanks $NAME! Please pick the time for your appointment:"
   #29--------------------------------------------------------------------------------
 fi
 }
