@@ -15,7 +15,10 @@ ALTER TABLE appointments
 ALTER TABLE appointments 
   ADD CONSTRAINT appointment_customer FOREIGN KEY(customer_id) REFERENCES customers(customer_id);
 
-INSERT INTO services (name) VALUES ('Haircut', 'Beard', 'Manicure', 'Color', 'Massage');
+-- INSERT INTO services (name) VALUES ('Haircut', 'Beard', 'Manicure', 'Color', 'Massage');
 
-
-  
+INSERT INTO services (name) VALUES ('Haircut');
+INSERT INTO services (name) VALUES ('Beard');  
+INSERT INTO services (name) VALUES ('Manicure');
+INSERT INTO services (name) VALUES ('Color');
+INSERT INTO services (name) VALUES ('Massage');
