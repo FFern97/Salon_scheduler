@@ -1,3 +1,4 @@
+#! /bin/bash
 #TYPE on bash terminal to grant permission
 #chmod +x salon.sh
 #./ salon.sh
