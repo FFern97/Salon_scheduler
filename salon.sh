@@ -4,24 +4,24 @@
 #--------
 
 PSQL="psql -X --username=freecodecamp --dbname=salon --tuples-only -c"
+
+
 echo -e "\n ----- Barbershop -----\n"
 
-PSQL="psql -X --username=freecodecamp --dbname=salon --tuples-only -c"
-
-# Función para mostrar el menú y manejar la selección de servicios
+# FUNCIÓN MENU
 MAIN_MENU() {
   while true
   do
     echo -e "\nPlease select your service:"
 
-    # Muestra el menú de servicios
+# MUESTRA MENU    
     SERVICES=$($PSQL "SELECT * FROM services;")
     echo "$SERVICES" | while read SERVICE_ID BAR NAME
     do
       echo "$SERVICE_ID) $NAME"
     done
 
-    # Lee la selección del servicio
+# LEE SERVICIO
     read SERVICE_ID_SELECTED
     SERVICE_EXIST=$($PSQL "SELECT service_id FROM services WHERE service_id=$SERVICE_ID_SELECTED")
 
@@ -34,10 +34,10 @@ MAIN_MENU() {
   done
 }
 
-# Llama a la función para mostrar el menú y manejar la selección de servicios
+# FUNCIÓN MENU
 MAIN_MENU
 
-# Lee el número de teléfono del cliente
+# LEE TELEFONO Y NOMBRE 
 echo -e "\nInsert phone number please: "
 read CUSTOMER_PHONE
 CUSTOMER_EXIST=$($PSQL "SELECT name FROM customers WHERE phone='$CUSTOMER_PHONE'")
@@ -53,12 +53,16 @@ else
   echo -e "Welcome back, $CUSTOMER_NAME!"
 fi
 
-# Obtén el nombre del servicio seleccionado
+# NOMBRE DEL SERVICIO SELECCIONADO
 SERVICE_NAME=$($PSQL "SELECT name FROM services WHERE service_id='$SERVICE_ID_SELECTED'")
 
-# Lee la hora del servicio
+# ID DEL CLIENTE
+CUSTOMER_ID=$($PSQL "SELECT customer_id FROM customers WHERE name='$CUSTOMER_NAME'")
+
+# LEE HORARIO DEL TURNO
 echo -e "\nPlease pick the time for your appointment:"
 read SERVICE_TIME
+INSERTED=$($PSQL "INSERT INTO appointments (time, customer_id, service_id) VALUES ('$SERVICE_TIME','$CUSTOMER_ID','$SERVICE_ID_SELECTED')")
 echo -e "\nI have put you down for a $SERVICE_NAME at $SERVICE_TIME, $CUSTOMER_NAME."
 
 
