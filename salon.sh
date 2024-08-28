@@ -5,7 +5,7 @@
 
 #--------------------
 
-PSQL="psql --username=freecodecamp --dbname=salon --t"
+PSQL="psql -X --username=freecodecamp --dbname=salon --tuples-only -c"
 
 echo -e "\n ----- Barbershop -----\n"
 
@@ -20,7 +20,7 @@ fi
 
 SERVICES=$($PSQL "SELECT * FROM services;")
 
-echo $SERVICES | while read SERVICE_ID BAR NAME
+echo "$SERVICES" | while read SERVICE_ID BAR NAME
 do
     echo "$SERVICE_ID) $NAME"
 done
