@@ -1,22 +1,13 @@
-#! /bin/bash
+echo -e "\nPlease select your service:"
 
-# Type ==>  chmod +x salon.sh
-#           ./salon.sh
-
-#--------------------
-
-PSQL="psql -X --username=freecodecamp --dbname=salon --tuples-only -c"
-
-echo -e "\n ----- Barbershop -----\n"
-
-MAIN_MENU(){
+MAIN_MENU() {
 
 if [[ $1 ]]
 then 
   echo -e "\n$1" 
 fi
 
-#------
+#------ MENU 
 
 SERVICES=$($PSQL "SELECT * FROM services;")
 
@@ -25,16 +16,17 @@ do
     echo "$SERVICE_ID) $NAME"
 done
 
-#-------
+#------ SERVICE SELECTION 
+
 read SERVICE_SELECTION
-SERVICE_EXIST=$($PSQL "SELECT  name FROM services WHERE service_id=$SERVICE_SELECTION")
+SERVICE_EXIST=$($PSQL "SELECT service_id FROM services WHERE service_id=$SERVICE_SELECTION")
 
 if [[ -z $SERVICE_EXIST ]]
 then 
   MAIN_MENU "Couldn't find that service. Please choose again!"
 fi
 
-#------
+#------ NUMBER INSERTION
 
 echo -e "\nInsert phone number please: "
 read PHONE_NUMBER
